@@ -231,4 +231,4 @@ pixi list -e test --sort-by name
 pi_lib                                          323.77 MiB  pypi   ./
 ```
 
-`pi_lib` shows up as a `pypi`-kind dependency sourced from `./` — that's pixi's editable install of your own package, sitting in the resolved environment right next to `pytest` and `numpy`.
+`pi_lib` shows up as a `pypi`-kind dependency sourced from `./` — that's pixi's editable install of your own package, sitting in the resolved environment right next to `pytest` and `numpy`. That size reflects the resolved editable source tree pixi tracks, not the actual size of your tiny library code.

@@ -99,6 +99,8 @@ bzip2                      1.0.8        hd037594_9           121.91 KiB  conda  
 ca-certificates            2026.6.17    hbd8a1cb_0           125.85 KiB  conda  https://conda.anaconda.org/conda-forge
 ```
 
+(Captured on macOS — a linux-64 Codespace will show `Installed for: linux-64` and Linux build strings instead.)
+
 But without `-e dev`, pixi runs in the **default** environment — and pytest isn't there:
 
 ```
@@ -184,7 +186,7 @@ In Codespaces, accept the "Open in Browser" prompt for the forwarded port (or us
 
 ## 🚀 If you're ahead
 
-**(a) Combine features into one environment.** A task named `full` already exists from Lesson 03, so this combined environment is named `all`:
+**(a) Combine features into one environment.** It's named `all` because it combines every feature you've defined so far — `dev` and `lab`:
 
 ```bash
 pixi workspace environment add all --feature dev --feature lab

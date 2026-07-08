@@ -78,7 +78,7 @@ wc -l pixi.lock pixi.toml
     1202 total
 ```
 
-That's one package. `pixi.lock` records every package pixi's solver picked — the exact version, the exact build string, a content hash (`sha256`/`md5`), and its own dependencies — repeated per platform your project targets. Your manifest is ~15 lines of intent (`numpy = ">=2.5.1,<3"`); the lock is the complete, solved answer: 1,187 lines that pin down precisely what "the environment" means, byte for byte.
+That's one package. `pixi.lock` records every package pixi's solver picked — the exact version, the exact build string, a content hash (`sha256`/`md5`), and its own dependencies — repeated per platform your project targets. Your manifest is ~15 lines of intent (`numpy = ">=2.5.1,<3"`); the lock is the complete, solved answer: 1,187 lines that pin down precisely what "the environment" means, byte for byte. (This was captured on macOS; a linux-64 Codespace will show `linux-64` paths and build strings, and a different line count.)
 
 ## Delete your environment. On purpose.
 
