@@ -37,11 +37,16 @@ pixi add --feature dev pytest
 pixi workspace environment add dev --feature dev
 ```
 
-The first command adds `pytest` to a new `dev` feature — not to the default environment. Pixi warns about this immediately, because a feature with no environment referencing it is inert:
+The first command adds `pytest` to a new `dev` feature — not to the default environment:
 
 ```
 ✔ Added pytest
 Added these only for feature: dev
+```
+
+A feature with no environment referencing it is inert, and pixi warns about exactly that the next time it parses the manifest — which happens immediately, on the second command, before that command's own fix takes effect:
+
+```
  WARN Encountered 1 warning while parsing the manifest:
   ⚠ The feature 'dev' is defined but not used in any environment. Dependencies
   │ of unused features are not resolved or checked, and use wildcard (*)
@@ -56,6 +61,8 @@ Added these only for feature: dev
 
 ✔ Added environment dev
 ```
+
+(Exact line numbers in the warning depend on how many lines already precede `[feature.dev.dependencies]` in your `pixi.toml` — don't worry if yours differ.)
 
 The second command fixes exactly that — it wires the `dev` feature into a `dev` environment. `pixi.toml` now has:
 
