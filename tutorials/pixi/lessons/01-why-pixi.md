@@ -28,6 +28,14 @@ This isn't bad luck, it's the default outcome of conda and pip alone. Neither to
 | `conda activate` ceremony before every command | `pixi run` — no activation, ever |
 | Separate tools/files for conda-forge vs. PyPI packages | Both conda-forge and PyPI dependencies in one manifest |
 
+> **"But `uv` already gives me a lock file and isolated environments — why not just use that?"**
+>
+> Great question, and you don't have to give `uv` up: pixi *uses* `uv` under the hood for the PyPI half of its solve. When pixi solves an environment it resolves the **conda** packages first (with the `rattler` solver) and then the **PyPI** packages (with `uv`), both driven by one SAT solver, `resolvo` — and crucially, the PyPI packages are resolved *on top of* the conda packages, so the two are guaranteed compatible in a single `pixi.lock`.
+>
+> The difference from `uv` alone is **scope**. `uv` resolves PyPI packages only; pixi also resolves the whole **conda-forge** ecosystem — including the Python interpreter itself and compiled/system libraries that don't ship as working wheels on PyPI (GDAL's C libraries, CUDA, MKL). For a pure-Python, PyPI-only project, `uv` is excellent. For the scientific stack — where compiled and non-Python dependencies are the norm — you want the conda-forge world that a PyPI-only tool can't reach, with `uv`'s PyPI resolution layered in for the packages that live only on PyPI. (pixi's own advice: keep dependencies in the conda `[dependencies]` table where you can, and reach for `[pypi-dependencies]` only when a package isn't on conda-forge.)
+>
+> See the **Solving environments** section of the [pixi docs](https://pixi.prefix.dev/latest/llms-full.txt) for the full picture of how the `rattler` (conda) and `uv` (PyPI) solvers combine.
+
 ## Watch: reproducibility in one command
 
 Everyone in the room has a pre-built example project already checked out. Run this now — you don't need to understand it yet, just watch what comes back:

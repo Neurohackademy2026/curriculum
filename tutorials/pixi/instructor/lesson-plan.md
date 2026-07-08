@@ -137,6 +137,7 @@ No 💭 Think prompts in this lesson — it's the 7-minute recap/preview lesson.
 - **"Should I commit `pixi.lock`?"** → Yes, always. It IS the reproducibility artifact — without it, `pixi.toml`'s version ranges are just intent, not a guarantee.
 - **"Why not `requirements.txt`?"** → No solver (pip resolves greedily, not a full SAT-style solve), no non-Python (conda-forge) dependencies, and no hash-locked transitive dependency tree by default.
 - **"Do I have to abandon my `pyproject.toml` or build backend for pixi?"** → No. `[tool.pixi.*]` tables embed alongside your existing metadata; `[project]` and `[build-system]` stay authoritative for pip/uv/PyPI users.
+- **"Isn't `uv` enough now — it has locking and isolated environments too?"** → For a pure-Python, PyPI-only project, `uv` is excellent — and pixi doesn't compete with it, it *uses* it: pixi resolves conda packages with `rattler` and PyPI packages with `uv` (one `resolvo` SAT solver), with PyPI resolved on top of the conda base into a single `pixi.lock`. The difference is scope: `uv` is PyPI-only, while pixi also resolves the conda-forge ecosystem — the Python interpreter itself plus compiled/system libraries that don't ship as working PyPI wheels (GDAL's C libs, CUDA, MKL). That conda-forge reach is exactly what the scientific stack needs. Advice: keep deps in the conda `[dependencies]` table where possible, use `[pypi-dependencies]` only for packages not on conda-forge. (This is the "But `uv` already does this?" aside in Lesson 01.)
 
 ## Common stumbling points
 
