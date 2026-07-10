@@ -6,7 +6,7 @@ It complements — and does not replace — the participant-facing lessons.
 
 ## Learning goals
 
-Copied from `tutorials/pixi/README.md` (## Learning goals). **Keep these in
+Copied from `lsetiawan-pixi/README.md` (## Learning goals). **Keep these in
 sync with the landing page** — if the goals change there, update this list
 too.
 
@@ -155,7 +155,7 @@ Run T-1 day (2026-07-16):
 
 1. Create a **fresh** codespace from the `Pixi Tutorial (NeuroHackademy 2026)` dev container configuration — do not reuse an old one.
 2. Run every lesson's command blocks top-to-bottom in that codespace: lessons 02→04 in sequence (they build on `scratch/monte-carlo`), then lesson 05 in its own `scratch/pi-lib`, including the catch-up boxes.
-3. Confirm `cd tutorials/pixi/example && pixi run analyze` matches the transcripts shown in lessons 01 and 03.
+3. Confirm `cd lsetiawan-pixi/example && pixi run analyze` matches the transcripts shown in lessons 01 and 03.
 4. Confirm the CI workflow (`.github/workflows/pixi-tutorial-example.yml`) is green on its last run.
 5. Enable Codespaces prebuilds for the `Pixi Tutorial (NeuroHackademy 2026)` configuration if not already enabled.
 6. The morning of 2026-07-17, post the repo link and a "create your codespace now" reminder to participants.

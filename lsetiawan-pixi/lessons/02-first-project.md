@@ -102,7 +102,7 @@ pixi shell   # then inside: python -V, exit
 ## Your first analysis
 
 ```bash
-cp ../../tutorials/pixi/example/analyze.py .
+cp ../../lsetiawan-pixi/example/analyze.py .
 pixi run python analyze.py
 ```
 

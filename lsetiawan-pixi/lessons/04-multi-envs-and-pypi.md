@@ -17,7 +17,7 @@ rm -rf scratch/monte-carlo
 pixi init scratch/monte-carlo
 cd scratch/monte-carlo
 pixi add python numpy matplotlib
-cp ../../tutorials/pixi/example/analyze.py .
+cp ../../lsetiawan-pixi/example/analyze.py .
 pixi task add analyze "python analyze.py"
 pixi task add quick "python analyze.py --samples 2000"
 ```

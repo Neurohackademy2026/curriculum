@@ -83,7 +83,7 @@ Conda entries land in `[dependencies]`, `pip:` entries land in `[pypi-dependenci
 - Multiple environments and features: [pixi.sh/latest/workspace/multi_environment](https://pixi.sh/latest/workspace/multi_environment/)
 - CI: [setup-pixi](https://github.com/prefix-dev/setup-pixi) GitHub Action
 - Community: [Prefix Discord](https://discord.gg/kKV8ZxyzY4)
-- Template to copy: this repo's [`tutorials/pixi/example/`](../example/)
+- Template to copy: this repo's [`lsetiawan-pixi/example/`](../example/)
 
 ## Before you leave
 

@@ -41,7 +41,7 @@ This isn't bad luck, it's the default outcome of conda and pip alone. Neither to
 Everyone in the room has a pre-built example project already checked out. Run this now — you don't need to understand it yet, just watch what comes back:
 
 ```bash
-cd tutorials/pixi/example
+cd lsetiawan-pixi/example
 pixi run analyze
 ```
 
@@ -71,4 +71,4 @@ If that doesn't print a version, raise a hand or drop a 👋 in chat — don't f
 
 ## 🚀 If you're ahead
 
-Skim `tutorials/pixi/example/pixi.toml`. Before Lesson 02 explains it, predict what each table (`[workspace]`, `[tasks]`, `[dependencies]`) does — you'll write one from scratch next.
+Skim `lsetiawan-pixi/example/pixi.toml`. Before Lesson 02 explains it, predict what each table (`[workspace]`, `[tasks]`, `[dependencies]`) does — you'll write one from scratch next.

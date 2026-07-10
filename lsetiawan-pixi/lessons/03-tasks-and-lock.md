@@ -18,7 +18,7 @@ rm -rf scratch/monte-carlo
 pixi init scratch/monte-carlo
 cd scratch/monte-carlo
 pixi add python numpy matplotlib
-cp ../../tutorials/pixi/example/analyze.py .
+cp ../../lsetiawan-pixi/example/analyze.py .
 ```
 
 This recreates Lesson 02's end state from nothing — if you already have `scratch/monte-carlo` from last time, this is a safe reset, not required.
@@ -104,9 +104,9 @@ No error, no re-solve, no prompt. `pixi` silently reinstalled every package from
 Now do what the instructor did in Lesson 01 — reproduce someone else's environment without touching a version number yourself.
 
 ```bash
-cd ../../tutorials/pixi/example
+cd ../../lsetiawan-pixi/example
 pixi run analyze
-cd ../../../scratch/monte-carlo
+cd ../../scratch/monte-carlo
 ```
 
 ```
@@ -144,11 +144,11 @@ name: pixi-tutorial-example
 on:
   push:
     paths:
-      - "tutorials/pixi/example/**"
+      - "lsetiawan-pixi/example/**"
       - ".github/workflows/pixi-tutorial-example.yml"
   pull_request:
     paths:
-      - "tutorials/pixi/example/**"
+      - "lsetiawan-pixi/example/**"
       - ".github/workflows/pixi-tutorial-example.yml"
 
 jobs:
@@ -160,22 +160,22 @@ jobs:
       - name: Install pixi (locked install of the example environment)
         uses: prefix-dev/setup-pixi@v0.10.0
         with:
-          manifest-path: tutorials/pixi/example/pixi.toml
+          manifest-path: lsetiawan-pixi/example/pixi.toml
           locked: true
 
       - name: Reproduce the analysis
         run: pixi run analyze
-        working-directory: tutorials/pixi/example
+        working-directory: lsetiawan-pixi/example
 
       - name: Upload the figure
         uses: actions/upload-artifact@v4
         with:
           name: pi-estimate
-          path: tutorials/pixi/example/pi-estimate.png
+          path: lsetiawan-pixi/example/pi-estimate.png
 ```
 
 - `prefix-dev/setup-pixi` installs pixi itself on the runner; `locked: true` tells it to install *exactly* what's in `pixi.lock` and fail the job outright if the lock and manifest have drifted apart — no silent re-solve on someone else's machine.
-- This exact file is what keeps `tutorials/pixi/example/` green in this repo, every time someone touches it.
+- This exact file is what keeps `lsetiawan-pixi/example/` green in this repo, every time someone touches it.
 
 No hands-on for this section — just read it.
 
