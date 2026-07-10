@@ -38,31 +38,27 @@ After the session, participants can:
 | 2:40–2:53 | [05 · Pixi for package maintainers](lessons/05-pyproject-for-maintainers.md) | Embed pixi in a `pyproject.toml`-based package. |
 | 2:53–3:00 | [06 · Going further](lessons/06-going-further.md) | Preview multi-platform locking, CI, `pixi global`, and migration paths. |
 
-## Before the session: set up your codespace
+## Before the session
 
-1. Make sure you're signed in to a GitHub account.
-2. On the repository page, click **Code ▸ Codespaces ▸ ⋯ ▸ New with options…**
-3. Under **Dev container configuration**, pick **Pixi Tutorial (NeuroHackademy 2026)**.
-4. Create the codespace and wait for the terminal prompt to appear.
-5. Verify the setup:
+You'll run this tutorial on the NeuroHackademy JupyterHub, where pixi is
+already installed and the curriculum repo is already in your home directory.
+
+1. Sign in to the JupyterHub and start your server.
+2. Open a terminal (**File ▸ New ▸ Terminal**).
+3. Move into the repo and pull the latest changes:
+
+```bash
+cd ~/2026-neurohack-curriculum
+git pull
+```
+
+4. Verify pixi is available:
 
 ```bash
 pixi --version
 ```
 
-*Create your codespace before the session starts — first-time creation can take a few minutes.*
-
-## No Codespaces? Local setup
-
-```bash
-curl -fsSL https://pixi.sh/install.sh | bash
-# restart your shell, then:
-git clone https://github.com/lsetiawan/2026-neurohack-curriculum.git
-cd 2026-neurohack-curriculum
-pixi --version
-```
-
-The tutorial is identical locally; only the JupyterLab step in Lesson 04 differs (plain `localhost` instead of a forwarded port).
+If that prints a version, you're ready.
 
 ## Lessons
 

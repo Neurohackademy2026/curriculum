@@ -141,11 +141,10 @@ No 💭 Think prompts in this lesson — it's the 7-minute recap/preview lesson.
 
 ## Common stumbling points
 
-- **Ran pixi in the repo root, not `scratch/monte-carlo`.** The root `pixi.toml` targets `osx-arm64` only — on a Linux codespace, this produces platform-related solve/install errors mentioning the missing platform. Fix: `cd scratch/monte-carlo` (or the relevant scratch dir) before running pixi commands.
-- **Codespace still building.** Point the participant back to the landing page's "Before the session: set up your codespace" section; they should have created it before the session started.
-- **Terminal opened before `postCreateCommand` finished.** Shows `pixi: command not found`. Fix: open a new terminal — the setup completes shortly after the codespace UI becomes available.
+- **Ran pixi in the repo root, not `scratch/monte-carlo`.** The root `pixi.toml` targets `osx-arm64` only — on the Linux hub, this produces platform-related solve/install errors mentioning the missing platform. Fix: `cd scratch/monte-carlo` (or the relevant scratch dir) before running pixi commands.
+- **Repo missing or out of date.** Point the participant back to the landing page's "Before the session" section: `cd ~/2026-neurohack-curriculum && git pull`.
 - **Forgot `-e dev`.** `pytest` reports "not found" in the default environment — this is expected behavior and a good teachable moment about environments being opt-in, not a bug.
-- **JupyterLab port prompt dismissed.** Open the PORTS panel and use port 8888 (paste the token URL from the terminal output) instead of waiting for a new prompt.
+- **JupyterLab won't open in the browser.** The second server runs inside the hub session on port 8888; reach it via the hub's `jupyter-server-proxy` at `.../user/<name>/proxy/8888/lab` (verify this path works on the hub before the session). If the proxy isn't available, confirming the `lab` env launched from the terminal log line is enough.
 - **Ran Lesson 05 commands inside `scratch/monte-carlo` instead of `scratch/pi-lib`.** The catch-up box (`rm -rf scratch/pi-lib` then `pixi init --format pyproject scratch/pi-lib`) fixes it — Lesson 05 is intentionally independent of prior lessons.
 - **TOML syntax error after hand-editing `pyproject.toml`.** Pixi prints a parse error with a line number — check brackets and quotes (common culprit: an unmatched `[` or a missing closing quote around a version string).
 
@@ -153,12 +152,12 @@ No 💭 Think prompts in this lesson — it's the 7-minute recap/preview lesson.
 
 Run T-1 day (2026-07-16):
 
-1. Create a **fresh** codespace from the `Pixi Tutorial (NeuroHackademy 2026)` dev container configuration — do not reuse an old one.
-2. Run every lesson's command blocks top-to-bottom in that codespace: lessons 02→04 in sequence (they build on `scratch/monte-carlo`), then lesson 05 in its own `scratch/pi-lib`, including the catch-up boxes.
+1. Start a **fresh** JupyterHub server and confirm `cd ~/2026-neurohack-curriculum && git pull` gives a clean, up-to-date repo.
+2. Run every lesson's command blocks top-to-bottom on the hub: lessons 02→04 in sequence (they build on `scratch/monte-carlo`), then lesson 05 in its own `scratch/pi-lib`, including the catch-up boxes.
 3. Confirm `cd lsetiawan-pixi/example && pixi run analyze` matches the transcripts shown in lessons 01 and 03.
 4. Confirm the CI workflow (`.github/workflows/pixi-tutorial-example.yml`) is green on its last run.
-5. Enable Codespaces prebuilds for the `Pixi Tutorial (NeuroHackademy 2026)` configuration if not already enabled.
-6. The morning of 2026-07-17, post the repo link and a "create your codespace now" reminder to participants.
+5. Confirm the hub image has pixi installed (`pixi --version`) and the curriculum repo is present in participants' home directories.
+6. The morning of 2026-07-17, post the hub link and a "start your server and `git pull`" reminder to participants.
 
 ## Feedback
 
@@ -172,6 +171,6 @@ _(fill in after 2026-07-17)_
 ## Room logistics
 
 - Project the lesson pages themselves — no slides.
-- Keep one healthy codespace open as the demo machine, separate from any codespace used for live troubleshooting.
+- Keep one healthy hub session open as the demo machine, separate from any session used for live troubleshooting.
 - Co-instructor/helper roams the room during "Your turn" blocks to help participants who fall behind.
 - Write the repo short-link on the board so participants can find it without hunting through chat.

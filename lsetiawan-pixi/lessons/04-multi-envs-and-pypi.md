@@ -12,7 +12,7 @@
 ## ⏩ Catch up
 
 ```bash
-cd /workspaces/2026-neurohack-curriculum
+cd ~/2026-neurohack-curriculum
 rm -rf scratch/monte-carlo
 pixi init scratch/monte-carlo
 cd scratch/monte-carlo
@@ -99,7 +99,7 @@ bzip2                      1.0.8        hd037594_9           121.91 KiB  conda  
 ca-certificates            2026.6.17    hbd8a1cb_0           125.85 KiB  conda  https://conda.anaconda.org/conda-forge
 ```
 
-(Captured on macOS — a linux-64 Codespace will show `Installed for: linux-64` and Linux build strings instead.)
+(Captured on macOS — a linux-64 hub session will show `Installed for: linux-64` and Linux build strings instead.)
 
 But without `-e dev`, pixi runs in the **default** environment — and pytest isn't there:
 
@@ -174,7 +174,7 @@ pixi run -e lab jupyter lab --no-browser
 [I ...ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
 ```
 
-In Codespaces, accept the "Open in Browser" prompt for the forwarded port (or use the PORTS panel, port 8888, paste the token URL); locally, open the printed `http://localhost:8888/...` URL. Stop with `Ctrl-C`.
+This second JupyterLab runs *inside* your hub session on port 8888. If the hub provides `jupyter-server-proxy`, open it at `https://<hub-url>/user/<your-username>/proxy/8888/lab` and paste the token from the terminal output; otherwise you can confirm the `lab` environment works from the log line above without opening the UI. Stop with `Ctrl-C`.
 
 </details>
 

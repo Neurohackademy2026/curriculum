@@ -13,7 +13,7 @@
 This lesson needs no project state; any terminal works:
 
 ```bash
-cd /workspaces/2026-neurohack-curriculum
+cd ~/2026-neurohack-curriculum
 ```
 
 ## Tools without projects: pixi global

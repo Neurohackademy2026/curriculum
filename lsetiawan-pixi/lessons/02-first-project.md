@@ -13,7 +13,7 @@
 ## ⏩ Catch up
 
 ```bash
-cd /workspaces/2026-neurohack-curriculum   # local: cd path/to/2026-neurohack-curriculum
+cd ~/2026-neurohack-curriculum
 ```
 
 This is the first hands-on lesson — as long as you're at the repo root, you're ready.
@@ -39,7 +39,7 @@ version = "0.1.0"
 [dependencies]
 ```
 
-(Your `authors` line will show whatever git identity is configured on your machine, and `platforms` will match whatever machine you ran `pixi init` on — this example was generated on macOS, so it shows `osx-arm64`; in Codespaces it will read `linux-64` instead, since Codespaces runs Linux. Everything else should match.)
+(Your `authors` line will show whatever git identity is configured on your machine, and `platforms` will match whatever machine you ran `pixi init` on — this example was generated on macOS, so it shows `osx-arm64`; on the JupyterHub it will read `linux-64` instead, since the hub runs Linux. Everything else should match.)
 
 Three tables, three jobs:
 

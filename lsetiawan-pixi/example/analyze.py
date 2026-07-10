@@ -9,7 +9,7 @@ import argparse
 
 import matplotlib
 
-matplotlib.use("Agg")  # render without a display (Codespaces, CI)
+matplotlib.use("Agg")  # render without a display (JupyterHub terminal, CI)
 import matplotlib.pyplot as plt
 import numpy as np
 

@@ -6,7 +6,7 @@
 
 - Name the two failure modes of ad-hoc environment management: **drift** and **non-reproducibility**.
 - State what pixi adds over conda/pip: per-project environments, a lock file by default, bundled tasks, and no activation step.
-- Confirm your codespace works.
+- Confirm your JupyterHub setup works.
 
 ## The problem
 
@@ -62,7 +62,7 @@ Everyone in the room just produced this identical output — that is the whole t
 pixi --version
 ```
 
-If that doesn't print a version, raise a hand or drop a 👋 in chat — don't fall behind silently. The [landing page setup section](../README.md#before-the-session-set-up-your-codespace) has the codespace steps if you need to redo them.
+If that doesn't print a version, raise a hand or drop a 👋 in chat — don't fall behind silently. The [landing page setup section](../README.md#before-the-session) has the steps if you need to redo them.
 
 **Debrief:**
 

@@ -13,7 +13,7 @@
 ## ⏩ Catch up
 
 ```bash
-cd /workspaces/2026-neurohack-curriculum
+cd ~/2026-neurohack-curriculum
 rm -rf scratch/monte-carlo
 pixi init scratch/monte-carlo
 cd scratch/monte-carlo
@@ -78,7 +78,7 @@ wc -l pixi.lock pixi.toml
     1202 total
 ```
 
-That's one package. `pixi.lock` records every package pixi's solver picked — the exact version, the exact build string, a content hash (`sha256`/`md5`), and its own dependencies — repeated per platform your project targets. Your manifest is ~15 lines of intent (`numpy = ">=2.5.1,<3"`); the lock is the complete, solved answer: 1,187 lines that pin down precisely what "the environment" means, byte for byte. (This was captured on macOS; a linux-64 Codespace will show `linux-64` paths and build strings, and a different line count.)
+That's one package. `pixi.lock` records every package pixi's solver picked — the exact version, the exact build string, a content hash (`sha256`/`md5`), and its own dependencies — repeated per platform your project targets. Your manifest is ~15 lines of intent (`numpy = ">=2.5.1,<3"`); the lock is the complete, solved answer: 1,187 lines that pin down precisely what "the environment" means, byte for byte. (This was captured on macOS; a linux-64 hub session will show `linux-64` paths and build strings, and a different line count.)
 
 ## Delete your environment. On purpose.
 
@@ -95,7 +95,7 @@ error   : 0.008487 (0.2702%)
 wrote   : pi-estimate.png
 ```
 
-No error, no re-solve, no prompt. `pixi` silently reinstalled every package from `pixi.lock` and ran the task — same four lines as before. The environment on disk (`.pixi/`) is a *cache*, rebuildable at any time from `pixi.toml` + `pixi.lock`. Those two files are the project; `.pixi/` is disposable. This is exactly why `.pixi/` is gitignored, and why a dead laptop or a fresh Codespace is a non-event.
+No error, no re-solve, no prompt. `pixi` silently reinstalled every package from `pixi.lock` and ran the task — same four lines as before. The environment on disk (`.pixi/`) is a *cache*, rebuildable at any time from `pixi.toml` + `pixi.lock`. Those two files are the project; `.pixi/` is disposable. This is exactly why `.pixi/` is gitignored, and why a dead laptop or a fresh hub session is a non-event.
 
 > 💭 **Think:** Your collaborator runs this project on their machine next week. Which file guarantees they get YOUR versions — the manifest or the lock?
 
@@ -117,7 +117,7 @@ error   : 0.008487 (0.2702%)
 wrote   : pi-estimate.png
 ```
 
-That project carries a committed lock for `linux-64`, `osx-arm64`, and `win-64`. You just reproduced its author's environment exactly — same package versions, same build strings — and the identical `pixi run analyze` works whether you're on this Mac, a Linux Codespace, or a Windows laptop.
+That project carries a committed lock for `linux-64`, `osx-arm64`, and `win-64`. You just reproduced its author's environment exactly — same package versions, same build strings — and the identical `pixi run analyze` works whether you're on this Mac, a Linux hub session, or a Windows laptop.
 
 ## One lock, many platforms
 
@@ -132,7 +132,7 @@ wc -l pixi.lock
     2643 pixi.lock
 ```
 
-(Before this command `pixi.lock` was 1,187 lines. `osx-arm64` was already this project's default platform, so pixi left it alone and only added `win-64` — your own output may differ if you started on a different platform. On a Codespace, whose default platform is `linux-64`, running this same command reports both `osx-arm64` and `win-64` as newly added — there's no "already present" line — and your starting `wc -l pixi.lock` count will differ from the macOS numbers shown here.) The line count more than doubled: the solver just worked out, and locked, a complete dependency set for a machine you don't own and have never run this code on.
+(Before this command `pixi.lock` was 1,187 lines. `osx-arm64` was already this project's default platform, so pixi left it alone and only added `win-64` — your own output may differ if you started on a different platform. On the hub, whose default platform is `linux-64`, running this same command reports both `osx-arm64` and `win-64` as newly added — there's no "already present" line — and your starting `wc -l pixi.lock` count will differ from the macOS numbers shown here.) The line count more than doubled: the solver just worked out, and locked, a complete dependency set for a machine you don't own and have never run this code on.
 
 ## The same trick in CI
 
