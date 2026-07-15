@@ -13,7 +13,7 @@
 ## ⏩ Catch up
 
 ```bash
-cd ~/2026-neurohack-curriculum
+cd ~/curriculum
 ```
 
 This is the first hands-on lesson — as long as you're at the repo root, you're ready.

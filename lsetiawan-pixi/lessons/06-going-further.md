@@ -13,7 +13,7 @@
 This lesson needs no project state; any terminal works:
 
 ```bash
-cd ~/2026-neurohack-curriculum
+cd ~/curriculum
 ```
 
 ## Tools without projects: pixi global
@@ -72,7 +72,7 @@ Conda entries land in `[dependencies]`, `pip:` entries land in `[pypi-dependenci
 - [x] Run project code with `pixi run` and `pixi shell` — no manual environment activation.
 - [x] Define tasks, including `depends-on` chains, to automate a workflow.
 - [x] Explain the distinct roles of `pixi.toml` and `pixi.lock` and why both are committed.
-- [x] Reproduce another person's project exactly via `pixi install` from a committed lock file.
+- [x] Reproduce another person's project exactly from a committed lock file.
 - [x] Create additional environments from features (e.g., a `dev` environment with pytest) and run commands in them with `-e`.
 - [x] Embed pixi in a Python package's `pyproject.toml` via `[tool.pixi.*]` tables: standard `[project]` metadata stays the single source of truth for pip/uv users, the package installs editable, and `[project.optional-dependencies]` extras map automatically to pixi features.
 - [x] Name the next steps beyond the session: multi-platform locking, CI with `setup-pixi`, `pixi global`, and `pixi init --import` migration from conda `environment.yml`.

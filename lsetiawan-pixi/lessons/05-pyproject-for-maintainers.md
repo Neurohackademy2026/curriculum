@@ -13,7 +13,7 @@
 This lesson is independent of every previous one — you can start here cold.
 
 ```bash
-cd ~/2026-neurohack-curriculum
+cd ~/curriculum
 rm -rf scratch/pi-lib
 ```
 

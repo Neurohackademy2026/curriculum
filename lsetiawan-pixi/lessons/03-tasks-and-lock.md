@@ -13,7 +13,7 @@
 ## ⏩ Catch up
 
 ```bash
-cd ~/2026-neurohack-curriculum
+cd ~/curriculum
 rm -rf scratch/monte-carlo
 pixi init scratch/monte-carlo
 cd scratch/monte-carlo

@@ -14,8 +14,7 @@ After the session, participants can:
 4. Define tasks, including `depends-on` chains, to automate a workflow.
 5. Explain the distinct roles of `pixi.toml` and `pixi.lock` and why both
    are committed.
-6. Reproduce another person's project exactly via `pixi install` from a
-   committed lock file.
+6. Reproduce another person's project exactly from a committed lock file.
 7. Create additional environments from features (e.g., a `dev` environment
    with pytest) and run commands in them with `-e`.
 8. Embed pixi in a Python package's `pyproject.toml` via `[tool.pixi.*]`
@@ -48,7 +47,7 @@ already installed and the curriculum repo is already in your home directory.
 3. Move into the repo and pull the latest changes:
 
 ```bash
-cd ~/2026-neurohack-curriculum
+cd ~/curriculum
 git pull
 ```
 

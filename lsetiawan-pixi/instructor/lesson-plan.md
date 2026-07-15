@@ -20,8 +20,7 @@ After the session, participants can:
 4. Define tasks, including `depends-on` chains, to automate a workflow.
 5. Explain the distinct roles of `pixi.toml` and `pixi.lock` and why both
    are committed.
-6. Reproduce another person's project exactly via `pixi install` from a
-   committed lock file.
+6. Reproduce another person's project exactly from a committed lock file.
 7. Create additional environments from features (e.g., a `dev` environment
    with pytest) and run commands in them with `-e`.
 8. Embed pixi in a Python package's `pyproject.toml` via `[tool.pixi.*]`
@@ -42,7 +41,7 @@ After the session, participants can:
 | 2:05–2:25 | [03 · Tasks & the lock file](../lessons/03-tasks-and-lock.md) | **At 2:10, Lesson 03 must have started** — else skip its platforms section ("One lock, many platforms") and its CI section ("The same trick in CI"). | Cut the CI walkthrough (display-only anyway) and the platforms section; keep tasks + lock file, which carry the core reproducibility goal. |
 | 2:25–2:40 | [04 · Beyond one environment](../lessons/04-multi-envs-and-pypi.md) | **At 2:30, Lesson 04 must have started** — else demo the dev-env commands from the projector instead of hands-on. | Switch straight to projector demo of `pixi add --feature dev` / `pixi workspace environment add`; skip the PyPI hands-on and just show the toml diff. |
 | 2:40–2:53 | [05 · Pixi for package maintainers](../lessons/05-pyproject-for-maintainers.md) | **At 2:45, Lesson 05 must have started** — else run it display-only from the projector (the pyproject anatomy still lands as a demo). | Narrate the `pyproject.toml` anatomy and the editable-install proof from the projector; don't wait for everyone's `scratch/pi-lib` to catch up. |
-| 2:53–3:00 | [06 · Going further](../lessons/06-going-further.md) | **At 2:55, jump to Lesson 06 section 5 (recap) no matter what.** | Skip `pixi global` and migration demos entirely; land on the checklist recap and the two closing questions. |
+| 2:53–3:00 | [06 · Going further](../lessons/06-going-further.md) | **At 2:55, jump to Lesson 06's recap ("What you can now do") no matter what.** | Skip `pixi global` and migration demos entirely; land on the checklist recap and the two closing questions. |
 
 ## Cut list & stretch list
 
@@ -107,7 +106,7 @@ one common misconception + reframe, followed by four standing FAQ items.
 
 > 💭 **Think:** The default environment is what your users get. What belongs in it — and what have you been making users install that they never needed?
 
-- **Expected answer(s):** Only runtime deps needed to use the project (e.g., numpy/matplotlib for the analysis script) belong in the default `[dependencies]`. Dev tooling — pytest, linters, JupyterLab — has often been bundled in unnecessarily via a single shared conda `environment.yml`, forcing every installer to pull it down.
+- **Expected answer(s):** Only runtime deps needed to use the project (e.g., numpy/matplotlib for the analysis script) belong in the default `[dependencies]`. Dev tooling — pytest, linters, IPython — has often been bundled in unnecessarily via a single shared conda `environment.yml`, forcing every installer to pull it down.
 - **Misconception + reframe:** "More dependencies pre-installed is more convenient for everyone." Reframe: every extra dependency in the default environment is something CI, collaborators, and end users all pay for in install time and solver complexity — features let you make dev tooling opt-in without a second environment file to maintain.
 
 > 💭 **Think:** Name one package you've only ever found on PyPI. Where does it fit in this project now?
@@ -141,10 +140,10 @@ No 💭 Think prompts in this lesson — it's the 7-minute recap/preview lesson.
 
 ## Common stumbling points
 
-- **Ran pixi in the repo root, not `scratch/monte-carlo`.** The root `pixi.toml` targets `osx-arm64` only — on the Linux hub, this produces platform-related solve/install errors mentioning the missing platform. Fix: `cd scratch/monte-carlo` (or the relevant scratch dir) before running pixi commands.
-- **Repo missing or out of date.** Point the participant back to the landing page's "Before the session" section: `cd ~/2026-neurohack-curriculum && git pull`.
+- **Ran pixi in the repo root, not `scratch/monte-carlo`.** The repo root has no manifest, so pixi commands there fail with a "could not find pixi.toml" / missing-manifest error. Fix: `cd scratch/monte-carlo` (or the relevant scratch dir) before running pixi commands.
+- **Repo missing or out of date.** Point the participant back to the landing page's "Before the session" section: `cd ~/curriculum && git pull`.
 - **Forgot `-e dev`.** `pytest` reports "not found" in the default environment — this is expected behavior and a good teachable moment about environments being opt-in, not a bug.
-- **JupyterLab won't open in the browser.** The second server runs inside the hub session on port 8888; reach it via the hub's `jupyter-server-proxy` at `.../user/<name>/proxy/8888/lab` (verify this path works on the hub before the session). If the proxy isn't available, confirming the `lab` env launched from the terminal log line is enough.
+- **Stuck inside IPython during the Lesson 04 exercise.** The `repl` exercise deliberately ends inside an IPython session — prove it sees the project's packages (`import numpy; numpy.__version__`), then leave with `exit` (or Ctrl-D). Plain `pixi run ipython` without `-e repl` failing with "command not found" is the boundary check working — same teachable moment as the missing `-e dev` above, not a bug.
 - **Ran Lesson 05 commands inside `scratch/monte-carlo` instead of `scratch/pi-lib`.** The catch-up box (`rm -rf scratch/pi-lib` then `pixi init --format pyproject scratch/pi-lib`) fixes it — Lesson 05 is intentionally independent of prior lessons.
 - **TOML syntax error after hand-editing `pyproject.toml`.** Pixi prints a parse error with a line number — check brackets and quotes (common culprit: an unmatched `[` or a missing closing quote around a version string).
 
@@ -152,7 +151,7 @@ No 💭 Think prompts in this lesson — it's the 7-minute recap/preview lesson.
 
 Run T-1 day (2026-07-16):
 
-1. Start a **fresh** JupyterHub server and confirm `cd ~/2026-neurohack-curriculum && git pull` gives a clean, up-to-date repo.
+1. Start a **fresh** JupyterHub server and confirm `cd ~/curriculum && git pull` gives a clean, up-to-date repo.
 2. Run every lesson's command blocks top-to-bottom on the hub: lessons 02→04 in sequence (they build on `scratch/monte-carlo`), then lesson 05 in its own `scratch/pi-lib`, including the catch-up boxes.
 3. Confirm `cd lsetiawan-pixi/example && pixi run analyze` matches the transcripts shown in lessons 01 and 03.
 4. Confirm the CI workflow (`.github/workflows/pixi-tutorial-example.yml`) is green on its last run.
@@ -170,7 +169,8 @@ _(fill in after 2026-07-17)_
 
 ## Room logistics
 
-- Project the lesson pages themselves — no slides.
+- Project the slide deck ([`pixi-tutorial-slides.html`](../pixi-tutorial-slides.html)); the lesson pages mirror its content, so participants can follow along or catch up there.
+- Keep [`commands.md`](commands.md) open on the demo machine — the copy-paste commands for each 🏋️ exercise, keyed to slide numbers.
 - Keep one healthy hub session open as the demo machine, separate from any session used for live troubleshooting.
 - Co-instructor/helper roams the room during "Your turn" blocks to help participants who fall behind.
 - Write the repo short-link on the board so participants can find it without hunting through chat.

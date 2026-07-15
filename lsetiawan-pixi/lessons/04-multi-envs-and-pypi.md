@@ -12,7 +12,7 @@
 ## ⏩ Catch up
 
 ```bash
-cd ~/2026-neurohack-curriculum
+cd ~/curriculum
 rm -rf scratch/monte-carlo
 pixi init scratch/monte-carlo
 cd scratch/monte-carlo
@@ -26,7 +26,7 @@ This recreates Lesson 03's end state from nothing — if you already have `scrat
 
 ## The problem with one environment
 
-Your *users* need `numpy` and `matplotlib` to run `analyze.py` — nothing more. *You*, the person developing it, also want `pytest` to test it, maybe a linter, maybe JupyterLab to poke at it interactively. If all of that lands in one `[dependencies]` table, everyone who installs your project — CI, a collaborator, a user who just wants the figure — pulls down your entire dev toolchain too. Installs get slower, the dependency graph gets harder to solve, and the contract of "what does this project need to run" gets muddied with "what do I need to work on it."
+Your *users* need `numpy` and `matplotlib` to run `analyze.py` — nothing more. *You*, the person developing it, also want `pytest` to test it, maybe a linter, maybe an IPython shell to poke at it interactively. If all of that lands in one `[dependencies]` table, everyone who installs your project — CI, a collaborator, a user who just wants the figure — pulls down your entire dev toolchain too. Installs get slower, the dependency graph gets harder to solve, and the contract of "what does this project need to run" gets muddied with "what do I need to work on it."
 
 Conda's traditional answer is a second environment file (`environment-dev.yml` alongside `environment.yml`) that you maintain by hand and that drifts the moment someone updates one and forgets the other. Pixi's answer stays inside one manifest and one lock file: declare **features** — named groups of extra dependencies — then compose them into **environments**. The default environment is still just `[dependencies]`; anything else is opt-in.
 
@@ -148,12 +148,12 @@ tqdm = ">=4.68.4, <5"
 
 ## 🏋️ Your turn
 
-*Create a `lab` feature and environment containing `jupyterlab`, launch it, and open the analysis in a notebook.*
+*Create a `repl` feature and environment containing `ipython`, launch it, and prove it can see the project's packages. Then confirm the **default** environment can't.*
 
 <details>
 <summary>Hint</summary>
 
-Same two commands as the dev environment, new names; then `pixi run -e lab jupyter lab`.
+Same two commands as the dev environment, new names; then `pixi run -e repl ipython`.
 
 </details>
 
@@ -161,20 +161,25 @@ Same two commands as the dev environment, new names; then `pixi run -e lab jupyt
 <summary>Solution</summary>
 
 ```bash
-pixi add --feature lab jupyterlab
-pixi workspace environment add lab --feature lab
-pixi run -e lab jupyter lab --no-browser
+pixi add --feature repl ipython
+pixi workspace environment add repl --feature repl
+pixi run -e repl ipython
 ```
 
 ```
-[I ...ServerApp] Serving notebooks from local directory: .../scratch/monte-carlo
-[I ...ServerApp] Jupyter Server 2.20.0 is running at:
-[I ...ServerApp] http://localhost:8888/lab?token=687e359dc38bc51791aa8a26d7d29a54a2b73f8a15f176c3
-[I ...ServerApp]     http://127.0.0.1:8888/lab?token=687e359dc38bc51791aa8a26d7d29a54a2b73f8a15f176c3
-[I ...ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+✔ Added ipython
+Added these only for feature: repl
+✔ Added environment repl
 ```
 
-This second JupyterLab runs *inside* your hub session on port 8888. If the hub provides `jupyter-server-proxy`, open it at `https://<hub-url>/user/<your-username>/proxy/8888/lab` and paste the token from the terminal output; otherwise you can confirm the `lab` environment works from the log line above without opening the UI. Stop with `Ctrl-C`.
+Inside IPython, prove the environment sees the project's packages:
+
+```
+In [1]: import numpy; numpy.__version__
+Out[1]: '2.5.1'
+```
+
+Leave with `exit` — then check the boundary in the other direction: plain `pixi run ipython` (no `-e repl`) fails with *command not found*. IPython lives only in the `repl` environment; your users never install it.
 
 </details>
 
@@ -186,10 +191,10 @@ This second JupyterLab runs *inside* your hub session on port 8888. If the hub p
 
 ## 🚀 If you're ahead
 
-**(a) Combine features into one environment.** It's named `all` because it combines every feature you've defined so far — `dev` and `lab`:
+**(a) Combine features into one environment.** It's named `all` because it combines every feature you've defined so far — `dev` and `repl`:
 
 ```bash
-pixi workspace environment add all --feature dev --feature lab
+pixi workspace environment add all --feature dev --feature repl
 pixi list -e all
 ```
 
@@ -197,13 +202,13 @@ pixi list -e all
 ✔ Added environment all
 ```
 
-`pixi list -e all` prints every package resolved for that environment — both `pytest` from the `dev` feature and `jupyterlab` from the `lab` feature, solved together and installed side by side. `pixi.toml`'s `[environments]` table now reads:
+`pixi list -e all` prints every package resolved for that environment — both `pytest` from the `dev` feature and `ipython` from the `repl` feature, solved together and installed side by side. `pixi.toml`'s `[environments]` table now reads:
 
 ```toml
 [environments]
 dev = ["dev"]
-lab = ["lab"]
-all = ["dev", "lab"]
+repl = ["repl"]
+all = ["dev", "repl"]
 ```
 
 **(b) Put that dev environment to work.** Create `test_analyze.py`:
