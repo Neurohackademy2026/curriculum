@@ -212,3 +212,9 @@ __marimo__/
 
 # participant hands-on workspace (pixi tutorial)
 scratch/
+
+# macos
+.DS_Store
+
+# hubble notes
+.hubble/*
