@@ -2,6 +2,20 @@
 
 
 
+## Jupyterhub note on using pixi as env
+
+If you're using pixi-kernel on JupyterHub and cannot access the environment where JupyterLab is installed, you can use the following workaround:
+
+1. Install `pixi-kernel` locally: `pip install pixi-kernel --user`
+2. Restart your JupyterLab server
+3. Check that pixi-kernel is successfully enabled: `jupyter labextension list`
+4. Create any notebook underneath the directory with `pixi.toml`
+  1. select the `Python (Pixi)` kernel in the notebook
+  2. go to the pixi extension window (it should detect the pixi envs)
+  3. select the env, save, and restart kernel
+
+
+
 ## Slide 20
 
 *Add one more dependency of your choice from conda-forge (ideas: rich, scipy, polars) and prove you can import it. Then look at what changed in pixi.toml vs pixi.lock.*
